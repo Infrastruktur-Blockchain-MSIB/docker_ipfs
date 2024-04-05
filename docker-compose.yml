@@ -1,0 +1,28 @@
+services:
+
+  ipfs0:
+    container_name: ipfs0
+    image: ipfs/kubo:latest
+    ports:
+     - "4001:4001" # ipfs swarm - expose if needed/wanted
+     - "5001:5001" # ipfs api - expose if needed/wanted
+     - "8080:8080" # ipfs gateway - expose if needed/wanted
+    volumes:
+      - ./ipfs0:/data/ipfs
+      - ./bootstrap.sh:/container-init.d/remove_bootstrap.sh
+  cluster0:
+    container_name: cluster0
+    image: ipfs/ipfs-cluster:latest
+    depends_on:
+      - ipfs0
+    environment:
+      CLUSTER_PEERNAME: cluster0
+      CLUSTER_SECRET: ${CLUSTER_SECRET}
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs0/tcp/5001
+      CLUSTER_CRDT_TRUSTEDPEERS: '*'
+      CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
+      CLUSTER_MONITORPINGINTERVAL: 2s
+    ports:
+      - "127.0.0.1:9094:9094"
+    volumes:
+      - ./cluster0:/data/ipfs-cluster
