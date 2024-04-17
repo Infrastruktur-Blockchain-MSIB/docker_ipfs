@@ -16,7 +16,7 @@ services:
     depends_on:
       - ipfs-PT
     environment:
-      CLUSTER_PEERNAME: cluster-ITTP
+      CLUSTER_PEERNAME: cluster-PT
       CLUSTER_SECRET: d401b155e50f972c3117ffefb92e2972d45f18cdf9d11fc072935b39d7bae96d
       CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs0/tcp/5001
       CLUSTER_CRDT_TRUSTEDPEERS: '*'
