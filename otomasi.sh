@@ -1,4 +1,4 @@
-Step 1: Update docker-compose.yml
+#Step 1: Update docker-compose.yml
 sed -i 's/$PT/UNISA/g' docker-compose.yml
 
 #Step 2: Docker compose up
