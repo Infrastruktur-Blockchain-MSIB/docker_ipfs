@@ -27,3 +27,4 @@ services:
       - "9096:9096"
     volumes:
       - ./cluster:/data/ipfs-cluster
+      - ./recover.sh:/container-init.d/recover.sh
